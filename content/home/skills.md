@@ -24,10 +24,10 @@ feature:
   icon: chart-line
   icon_pack: fas
   name: Statistics
-- description: 50%
-  icon: js-square
-  icon_pack: fas
-  name: JavaScript
+- description: 70%
+  icon: js
+  icon_pack: fab
+  name: Coding
 
 # Uncomment to use emoji icons.
 #- icon: ":smile:"
