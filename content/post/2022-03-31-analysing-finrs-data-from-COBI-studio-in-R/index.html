@@ -1,0 +1,288 @@
+---
+title: Analysing fNIRS data from COBI Studio in R (Part 1)
+author: Chris
+date: '2022-03-31'
+bibliography: [references.bib] 
+slug: analysing-finrs-data-from-COBI-studio-in-R
+categories: [research, data analysis, fNIRS, R]
+tags:
+  - fNIRS
+  - R
+  - R Studio
+image:
+  caption: 'Some noisy fNIRS data'
+  focal_point: 'Smart'
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<p>I am currently conducting a study that uses fNIRS to indirectly measure cognitive activity during a decision-making task. The fNIRS setup that we have is from BioPac, and though it seems to work well, the data files that are generated are made to be compatible with the software that the company also sells (convenient!).</p>
+<p>This is irritating for a number of reasons. Firstly, the analysis software requires a license, meaning additional costs to install it on the computer of a research or graduate student who might be conducing an fNIRS study and want to analyse their data. Secondly, and perhaps more importantly, I dislike proprietary file formats. There are many established tools for analysing fNIRS data. They expect a standard format for the data (.nirs or .snirf).</p>
+<p>Finally, most of the established analysis tools for fNIRS require MATLAB, so even if I convert the file format into .nirs, I would need to use MATLAB to analyse the data. I’m could do this, but I’m not normally a MATLAB user, so there’s an additional time investment, along with the fact that MATLAB has an associated cost and computing resource requirements: this is a barrier to entry for students or even sharing code/analysis with other academics (who I work with).</p>
+<div id="the-goal" class="section level2">
+<h2>The goal:</h2>
+<p>Essentially, I would like to be able to:</p>
+<ol style="list-style-type: decimal">
+<li>import the nirs data files from COBI studio into R</li>
+<li>identify the baseline values that are recorded at the beginning of the study</li>
+<li>identify the optodes and their associated values through the duration of the study</li>
+<li>link the event markers to the data</li>
+<li>visualise the data</li>
+<li>apply MBLL to the raw nirs data, to calculate Oxy and DeOxy values based on: the optode setup, relevant coefficient values, baseline values</li>
+<li>apply signal processing, such as: high/low pass filters, SMAR etc.</li>
+<li>Define event windows based on trial types and calculate averages across these different trials</li>
+</ol>
+</div>
+<div id="import-the-nirs-data-files-from-cobi-studio-into-r" class="section level2">
+<h2>1. import the nirs data files from COBI studio into R</h2>
+<div id="the-.nir-file" class="section level3">
+<h3>The .nir file</h3>
+<p>The first step in this process was understanding what data are generated from COBI Studio. A standard study will include 3 files:</p>
+<ul>
+<li>a .nir file which is raw nirs data from each sensor/receptor combination at 730nm, 850nm and the ambient light sensor.</li>
+<li>a .oxy file which includes automatically calculated oxy and deoxy calculations for each optode, based on the data in the .nirs file and the baseline values recorded at the start of the experiment (also present in the .nir file).</li>
+<li>a .mrk file which contains the markers that were sent during the study and their associated time value.</li>
+</ul>
+<p>I found a very good breakdown of the files in a Master’s thesis by <span class="citation"><a href="#ref-vural2018" role="doc-biblioref">Vural</a> (<a href="#ref-vural2018" role="doc-biblioref">2018</a>)</span> which included some useful images of the files. Here is an example if the .nir file:</p>
+<div class="figure">
+<img src="images/nirfile.png" alt="" />
+<p class="caption">The .nir file format</p>
+</div>
+<p>As we can see from the image:</p>
+<ul>
+<li><p>there is a section of information including the date and the current/gain settings for this specific recording session.</p></li>
+<li><p>There is an initial section recording baseline values</p></li>
+<li><p>There is a row where the baseline values are averaged</p></li>
+<li><p>The subsequent rows are the data from the study</p></li>
+</ul>
+<p>If we look at the columns:</p>
+<ul>
+<li><p>The first column is a time index.</p></li>
+<li><p>Each 3 subsequent columns represent an optode, with values from 730nm, 850nm and the ambient light sensor.</p></li>
+</ul>
+</div>
+<div id="reading-the-.nir-file" class="section level3">
+<h3>Reading the .nir file</h3>
+<p>With the above information, I could set about importing the data. The first step was to import the data in a raw format using <em>readlines()</em>:</p>
+<pre class="r"><code>nirfile &lt;- &quot;CWILSON_1_test3_02210957.nir&quot;
+nir1 &lt;- readLines(nirfile,   skipNul = TRUE) # read lines and skip empty rows
+nir1 &lt;- nir1 %&gt;% as_tibble(nir1)  # convert to tibble for ease of use later
+
+head(nir1)</code></pre>
+<pre><code># A tibble: 6 x 1
+  value                                  
+  &lt;chr&gt;                                  
+1 &quot;fnirUSB.dll log file&quot;                 
+2 &quot;Start Time:\tFri Feb 21 09:57:18 2020&quot;
+3 &quot;&quot;                                     
+4 &quot;Start Code:\t1534.887629\t1534734&quot;    
+5 &quot;Freq Code:\t2338343.000000&quot;           
+6 &quot;Current:\t17&quot;                         </code></pre>
+<p>The next step, which makes the file easier to separate and organise, is to assign a numerical value to each row:</p>
+<pre class="r"><code>nir1 &lt;- mutate(nir1, id = row_number()) # assign a value based on the row number
+head(nir1)</code></pre>
+<pre><code># A tibble: 6 x 2
+  value                                      id
+  &lt;chr&gt;                                   &lt;int&gt;
+1 &quot;fnirUSB.dll log file&quot;                      1
+2 &quot;Start Time:\tFri Feb 21 09:57:18 2020&quot;     2
+3 &quot;&quot;                                          3
+4 &quot;Start Code:\t1534.887629\t1534734&quot;         4
+5 &quot;Freq Code:\t2338343.000000&quot;                5
+6 &quot;Current:\t17&quot;                              6</code></pre>
+</div>
+<div id="identify-the-baseline-values-recorded-at-the-beginning-of-the-study" class="section level3">
+<h3>2. Identify the baseline values recorded at the beginning of the study</h3>
+<p>Now we need to use the id column to make it easy to idenitfy which rows contain the baseline values, using str_detect(). We store the rows where the baseline begins and ends, and store this information as <em>baselineNirsValues</em>. In the last line, we can use strsplit() and unnest() to separate the values into columns:</p>
+<pre class="r"><code>bStartRow &lt;-  nir1 %&gt;% filter(str_detect(.$value, &#39;Baseline values&#39;)) %&gt;% select(id)
+bEndRow &lt;- nir1 %&gt;% filter(str_detect(.$value, &#39;Baseline end&#39;)) %&gt;% select(id)
+baselineNirsValues &lt;- nir1 %&gt;% filter(id &gt; bStartRow$id &amp; id &lt; bEndRow$id)
+baselineNirsValues &lt;- baselineNirsValues %&gt;% mutate(value = strsplit(as.character(value), &quot;\t&quot;)) %&gt;%  unnest(value)
+head(baselineNirsValues)</code></pre>
+<pre><code># A tibble: 6 x 2
+  value      id
+  &lt;chr&gt;   &lt;int&gt;
+1 0          31
+2 3626.25    31
+3 0          31
+4 3998.25    31
+5 2291.40    31
+6 0          31</code></pre>
+<p>Since I am not certain whether this baseline will be useful (my study has an inter-trial period built in the the design, with a view to potentially using a moving baseline), I will come back to it another time.</p>
+</div>
+<div id="identify-the-optodes-and-their-associated-values-through-the-duration-of-the-study" class="section level3">
+<h3>3. Identify the optodes and their associated values through the duration of the study</h3>
+<p>We can use a similar approach to above to get the main nir data from each of the optodes. The end of the baseline can be used as the start point, and the last row can be used as an end point:</p>
+<pre class="r"><code>nirsEndRow &lt;-  nir1 %&gt;% filter(str_detect(.$value, &#39;-1  Device Stopped&#39;)) %&gt;% select(id)
+nirsDataValues &lt;- nir1 %&gt;% filter(id &gt; bEndRow$id &amp; id &lt; nirsEndRow$id)
+
+head(nirsDataValues)</code></pre>
+<pre><code># A tibble: 6 x 2
+  value                                                                       id
+  &lt;chr&gt;                                                                    &lt;int&gt;
+1 &quot;17.189\t3320.0\t2090.0\t3899.0\t2266.0\t77.0\t3501.0\t1620.0\t191.0\t2~    33
+2 &quot;17.699\t3305.0\t2190.0\t3904.0\t2273.0\t64.0\t3490.0\t1624.0\t201.0\t2~    34
+3 &quot;18.209\t3292.0\t2207.0\t3872.0\t2272.0\t83.0\t3492.0\t1627.0\t197.0\t2~    35
+4 &quot;18.719\t3323.0\t2281.0\t3891.0\t2284.0\t79.0\t3503.0\t1641.0\t206.0\t2~    36
+5 &quot;19.229\t3288.0\t2216.0\t3855.0\t2278.0\t59.0\t3501.0\t1636.0\t199.0\t2~    37
+6 &quot;19.739\t3249.0\t2234.0\t3895.0\t2276.0\t55.0\t3496.0\t1630.0\t197.0\t2~    38</code></pre>
+<p>However, the data are not labelled or presented in a useful way. We can use the image above to understand what each column represents. So we want the first column to be a time reference, and each 3 subsequent columns are values from 730nm, 850nm and the ambient light sensor, respectively. The below code seperates the data into columns and labels them appropriately:</p>
+<pre class="r"><code># separate nirs data columns 
+## first column is time from start in seconds
+nirsDataValues &lt;- separate(nirsDataValues, col = value, sep = &quot;\t&quot;, into = c(&quot;t&quot;, &quot;op_1_730&quot;,&quot;op_1_ambient&quot;,&quot;op_1_850&quot;,&quot;op_2_730&quot;,&quot;op_2_ambient&quot;,&quot;op_2_850&quot;,&quot;op_3_730&quot;,&quot;op_3_ambient&quot;,&quot;op_3_850&quot;,&quot;op_4_730&quot;,&quot;op_4_ambient&quot;,&quot;op_4_850&quot;, &quot;op_5_730&quot;,&quot;op_5_ambient&quot;,&quot;op_5_850&quot;, &quot;op_6_730&quot;,&quot;op_6_ambient&quot;,&quot;op_6_850&quot;, &quot;op_7_730&quot;,&quot;op_7_ambient&quot;,&quot;op_7_850&quot;, &quot;op_8_730&quot;,&quot;op_8_ambient&quot;,&quot;op_8_850&quot;,&quot;op_9_730&quot;,&quot;op_9_ambient&quot;,&quot;op_9_850&quot;,&quot;op_10_730&quot;,&quot;op_10_ambient&quot;,&quot;op_10_850&quot;,&quot;op_11_730&quot;,&quot;op_11_ambient&quot;,&quot;op_11_850&quot;,&quot;op_12_730&quot;,&quot;op_12_ambient&quot;,&quot;op_12_850&quot;,&quot;op_13_730&quot;,&quot;op_13_ambient&quot;,&quot;op_13_850&quot;,&quot;op_14_730&quot;,&quot;op_14_ambient&quot;,&quot;op_14_850&quot;,&quot;op_15_730&quot;,&quot;op_15_ambient&quot;,&quot;op_15_850&quot;,&quot;op_16_730&quot;,&quot;op_16_ambient&quot;,&quot;op_16_850&quot;), extra = &quot;merge&quot;)
+
+head(nirsDataValues)</code></pre>
+<pre><code># A tibble: 6 x 50
+  t      op_1_730 op_1_ambient op_1_850 op_2_730 op_2_ambient op_2_850 op_3_730
+  &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;   
+1 17.189 3320.0   2090.0       3899.0   2266.0   77.0         3501.0   1620.0  
+2 17.699 3305.0   2190.0       3904.0   2273.0   64.0         3490.0   1624.0  
+3 18.209 3292.0   2207.0       3872.0   2272.0   83.0         3492.0   1627.0  
+4 18.719 3323.0   2281.0       3891.0   2284.0   79.0         3503.0   1641.0  
+5 19.229 3288.0   2216.0       3855.0   2278.0   59.0         3501.0   1636.0  
+6 19.739 3249.0   2234.0       3895.0   2276.0   55.0         3496.0   1630.0  
+# ... with 42 more variables: op_3_ambient &lt;chr&gt;, op_3_850 &lt;chr&gt;,
+#   op_4_730 &lt;chr&gt;, op_4_ambient &lt;chr&gt;, op_4_850 &lt;chr&gt;, op_5_730 &lt;chr&gt;,
+#   op_5_ambient &lt;chr&gt;, op_5_850 &lt;chr&gt;, op_6_730 &lt;chr&gt;, op_6_ambient &lt;chr&gt;,
+#   op_6_850 &lt;chr&gt;, op_7_730 &lt;chr&gt;, op_7_ambient &lt;chr&gt;, op_7_850 &lt;chr&gt;,
+#   op_8_730 &lt;chr&gt;, op_8_ambient &lt;chr&gt;, op_8_850 &lt;chr&gt;, op_9_730 &lt;chr&gt;,
+#   op_9_ambient &lt;chr&gt;, op_9_850 &lt;chr&gt;, op_10_730 &lt;chr&gt;, op_10_ambient &lt;chr&gt;,
+#   op_10_850 &lt;chr&gt;, op_11_730 &lt;chr&gt;, op_11_ambient &lt;chr&gt;, op_11_850 &lt;chr&gt;, ...</code></pre>
+<p>One of the things we will see in the marker file later, is that the markers are recorded using a time index (like the first column of the nirs data) and also a row index, which starts at the first row of our nirs data (i.e. the first row after the baseline ends). To make it easier to join the marker data with the nirs data later, we are going to add a row index to match this, called <em>data_row</em>:</p>
+<pre class="r"><code># create a new column called data_row to match the markers
+nirsDataValues &lt;- mutate(nirsDataValues, data_row = row_number())</code></pre>
+<p>Finally, although the data are easier to read when they are displayed in a wide format(as above), analysis is easier if the data are in a long format. The next code will convert the data to long format to make it easier to analyse and visualise:</p>
+<pre class="r"><code>nirs_long &lt;- nirsDataValues %&gt;%
+  pivot_longer(
+    cols = op_1_730:op_16_850,
+    names_to = c(&quot;optode&quot;, &quot;freq&quot;),
+    names_pattern = &quot;op_(.*)_(.*)&quot;,
+    values_to = &quot;nir_value&quot;
+    
+  )
+
+head(nirs_long)</code></pre>
+<pre><code># A tibble: 6 x 6
+  t         id data_row optode freq    nir_value
+  &lt;chr&gt;  &lt;int&gt;    &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;    
+1 17.189    33        1 1      730     3320.0   
+2 17.189    33        1 1      ambient 2090.0   
+3 17.189    33        1 1      850     3899.0   
+4 17.189    33        1 2      730     2266.0   
+5 17.189    33        1 2      ambient 77.0     
+6 17.189    33        1 2      850     3501.0   </code></pre>
+</div>
+<div id="link-the-event-markers-to-the-data" class="section level3">
+<h3>4. Link the event markers to the data</h3>
+<p>To link the event markers to the data, we need to identify when the marker data starts and ends in the marker file and then to separate in into useful columns:</p>
+<pre class="r"><code>markfile &lt;- &quot;CWILSON_1_test3_02210957.mrk&quot;
+mrk1 &lt;- read_lines(markfile)
+# convert to tibble
+mrk1 &lt;- mrk1 %&gt;% as_tibble(mrk1) 
+# add id column
+mrk1 &lt;- mutate(mrk1, id = row_number()) 
+# marker start row
+mStartRow &lt;-  mrk1 %&gt;% filter(str_detect(.$value, &#39;Freq Code:&#39;)) %&gt;% select(id)
+ # get marker data from start row to end of file
+markerValues &lt;- mrk1 %&gt;% filter(id &gt; mStartRow$id &amp; id &lt;= max(id))
+# separate marker data into columns 
+markerValues &lt;- separate(markerValues, col = value, sep = &quot;\t&quot;, into = c(&quot;t&quot;,&quot;marker&quot;, &quot;data_row&quot;), extra = &quot;merge&quot;)
+# make sure data_row is an integer and not a character
+markerValues$data_row &lt;- as.integer(markerValues$data_row)
+
+head(markerValues)</code></pre>
+<pre><code># A tibble: 6 x 4
+  t       marker data_row    id
+  &lt;chr&gt;   &lt;chr&gt;     &lt;int&gt; &lt;int&gt;
+1 17.206  +             1     7
+2 112.001 ,           187     8
+3 112.006 -           187     9
+4 119.531 2           201    10
+5 149.558 5           260    11
+6 149.562 8           260    12</code></pre>
+<p>If we wish, we can use the <em>data_row</em> column we created in the nirs file to link with the markers. The reason that we might want this is that the fNIRS typically records at a resolution of 2Hz, which is one data point every 500ms. However, the markers could be sent in between that 500ms window and, as such, will not align to a nirs reading at the exact time the marker was sent. If we look at a particular data row in the marker file, and the nirs file, we can see that they don’t align exactly in time. Note that in the marker file above, the first marker is sent at 17.206 seconds (t). However, we can see that the closest time point in the nirs data file is 17.189 seconds, meaning the marker was recorded 17ms before the next nirs data point was recorded:</p>
+<pre class="r"><code>nirs_long %&gt;%
+  filter(data_row == 1) %&gt;% head()</code></pre>
+<pre><code># A tibble: 6 x 6
+  t         id data_row optode freq    nir_value
+  &lt;chr&gt;  &lt;int&gt;    &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;    
+1 17.189    33        1 1      730     3320.0   
+2 17.189    33        1 1      ambient 2090.0   
+3 17.189    33        1 1      850     3899.0   
+4 17.189    33        1 2      730     2266.0   
+5 17.189    33        1 2      ambient 77.0     
+6 17.189    33        1 2      850     3501.0   </code></pre>
+<p>As such, we can use the <em>data_row</em> column to match the marker to the closest nirs data point. Because the marker data and the nirs data both have a column called <em>data_row</em> we can join them together using the <em>left_join</em>:</p>
+<pre class="r"><code>## add markers to nirsdata 
+mrk2 &lt;- markerValues %&gt;% select(data_row, marker)
+nirs_with_markers &lt;- left_join(nirs_long, mrk2, by = &quot;data_row&quot;)
+
+head(nirs_with_markers)</code></pre>
+<pre><code># A tibble: 6 x 7
+  t         id data_row optode freq    nir_value marker
+  &lt;chr&gt;  &lt;int&gt;    &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt; 
+1 17.189    33        1 1      730     3320.0    +     
+2 17.189    33        1 1      ambient 2090.0    +     
+3 17.189    33        1 1      850     3899.0    +     
+4 17.189    33        1 2      730     2266.0    +     
+5 17.189    33        1 2      ambient 77.0      +     
+6 17.189    33        1 2      850     3501.0    +     </code></pre>
+<blockquote>
+<p>Note: I’m not sure if I am going to maintain this practice in real analysis, because I need to fully explore the implications for aligning the markers with the fNIRS sample rate. However, I will keep this for now, as I continue to explore analysing the data</p>
+</blockquote>
+</div>
+<div id="visualise-the-raw-data" class="section level3">
+<h3>5. Visualise the raw data</h3>
+<p>Finally, for this post, the next step was to visualise the nirs data by each optode and wavelength. First, some clean up of variable types. Optode was kept as an integer so it will display in correct order.</p>
+<pre class="r"><code>## clean up variable types 
+
+nirs_with_markers$t &lt;- as.double(nirs_with_markers$t)
+nirs_with_markers$optode &lt;- as.integer(nirs_with_markers$optode)
+nirs_with_markers$freq &lt;- as.factor(nirs_with_markers$freq)
+nirs_with_markers$nir_value &lt;- as.integer(nirs_with_markers$nir_value)
+nirs_with_markers$marker &lt;- as.factor(nirs_with_markers$marker)</code></pre>
+<p>Next, we can use ggplot to make a plot that displays the value for each of the 3 light frequencies (730, 850 and ambient). Using <em>facet_wrap</em> we can get a plot for each of the 16 optodes:</p>
+<pre class="r"><code>nirs_with_markers %&gt;%
+ggplot(aes(x = t, y = nir_value, color = freq)) +
+  geom_line() +
+  facet_wrap(.~ optode) </code></pre>
+<p><img src="images/firstplot-1.png" /></p>
+<p>To add the markers, we use a vline geom, but need to use the <em>ggnewscale</em> package to allow the colours attribute of the vline to not get mixed up with the colour attribute of the lines already on the plot. Linetype and colour of the vline is set by marker, allowing us to see different markers on the plot. We can also adjust alpha value to increase transparency of markers:</p>
+<pre class="r"><code>library(ggnewscale)</code></pre>
+<pre><code>Warning: package &#39;ggnewscale&#39; was built under R version 4.1.3</code></pre>
+<pre class="r"><code>nirs_with_markers %&gt;%
+ggplot(aes(x = t, y = nir_value, color = freq)) +
+  geom_line() +
+  ggnewscale::new_scale_color() +
+  geom_vline(data = nirs_with_markers %&gt;% filter(!is.na(marker)), aes(xintercept = t, linetype  = marker, colour = marker), alpha = 0.1) +
+  facet_wrap(.~ optode) </code></pre>
+<p><img src="images/secondplot-1.png" /></p>
+<p>Then, we can adjust the look of the plot using theme:</p>
+<pre class="r"><code>nirs_with_markers %&gt;%
+ggplot(aes(x = t, y = nir_value, color = freq)) +
+  geom_line() +
+  ggnewscale::new_scale_color() +
+  geom_vline(data = nirs_with_markers %&gt;% filter(!is.na(marker)), aes(xintercept = t, linetype  = marker, colour = marker), alpha = 0.1) +
+  facet_wrap(.~ optode) + 
+  theme_minimal()</code></pre>
+<p><img src="images/lastplot-1.png" /></p>
+<p>Finally, to show that the markers are actually on the plot (but hard to see when the plot is small), we can look at just 1 optode:</p>
+<pre class="r"><code>nirs_with_markers %&gt;%
+  filter(optode == 1) %&gt;%
+ggplot(aes(x = t, y = nir_value, color = freq)) +
+  geom_line() +
+  ggnewscale::new_scale_color() +
+  geom_vline(data = nirs_with_markers %&gt;% filter(!is.na(marker)), aes(xintercept = t, linetype  = marker, colour = marker), alpha = 0.5) +
+  theme_minimal()</code></pre>
+<p><img src="images/1optode-1.png" /></p>
+</div>
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1>References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-vural2018" class="csl-entry">
+Vural, Murat. 2018. <span>“Online Detection of Pilot Workload by Using fNIR Sensors.”</span> Master’s thesis, Middle East Technical University.
+</div>
+</div>
+</div>

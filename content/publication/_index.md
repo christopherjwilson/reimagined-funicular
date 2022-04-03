@@ -1,16 +1,7 @@
 ---
-title: Publications
-cms_exclude: true
 
-# View.
-#   1 = List
-#   2 = Compact
-#   3 = Card
-#   4 = Citation
-view: 4
-
-# Optional header image (relative to `static/media/` folder).
-header:
-  caption: ""
-  image: ""
 ---
+
+As of March 2022, I am still working on keeping this website syncronised and up to date with publications. There might be errors, omissions or broken links until I can fix this!  More information is here:
+
+[https://research.tees.ac.uk/en/persons/chris-wilson](https://research.tees.ac.uk/en/persons/chris-wilson)
