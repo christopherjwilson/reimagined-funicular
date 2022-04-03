@@ -51,7 +51,7 @@ footer:
 # Localization
 
 locale:
-  date_format: 'Jan 2, 2006'
+  date_format: '2 Jan, 2006'
   time_format: '3:04 PM'
   address_format: en-us
 
@@ -70,7 +70,7 @@ features:
   privacy_pack:
     enable: false
   repository:
-    url: 'https://github.com/<username>/<repository>'
+    url: 'https://github.com/christopherjwilson/reimagined-funicular'
     content_dir: content
     branch: master
   avatar:
@@ -100,7 +100,7 @@ features:
 extensions:
   cms:
     branch: master
-    local_backend: false
+    local_backend: true
   isotope:
     # Enable if you use the Portfolio widget or Publication filter
     enable: true
