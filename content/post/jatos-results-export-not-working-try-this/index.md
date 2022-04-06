@@ -1,7 +1,7 @@
 ---
 title: JATOS results export not working? Try this...
 subtitle: It took me a while to figure out!
-date: 2022-04-06T18:11:58.533Z
+date: 2022-04-06T18:14:40.753Z
 draft: false
 featured: false
 tags:
