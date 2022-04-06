@@ -6,6 +6,7 @@ draft: false
 featured: false
 tags:
   - JATOS
+  - research
 image:
   filename: screenshot_20220406-190954_chrome.jpg
   focal_point: Smart
