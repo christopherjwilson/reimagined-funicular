@@ -2,8 +2,8 @@
 title: JATOS results export not working? Try this...
 subtitle: It took me a while to figure out!
 date: 2022-04-06T18:24:58.198Z
-draft: false
-featured: true
+draft: true
+featured: false
 tags:
   - JATOS
   - research
