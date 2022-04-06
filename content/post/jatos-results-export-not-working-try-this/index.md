@@ -9,4 +9,4 @@ image:
   focal_point: Smart
   preview_only: false
 ---
-C
+Recently, I  was trying  o
