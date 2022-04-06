@@ -4,6 +4,8 @@ subtitle: It took me a while to figure out!
 date: 2022-04-06T18:11:58.533Z
 draft: false
 featured: false
+tags:
+  - JATOS
 image:
   filename: screenshot_20220406-190954_chrome.jpg
   focal_point: Smart
