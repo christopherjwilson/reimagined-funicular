@@ -1,0 +1,32 @@
+.citation {
+font-size: 0.5em;
+color: #00008b;
+opacity: 0.7;
+}
+.reveal .slide ul li, .reveal .slide ol li {
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+    padding-bottom: 0.8em;
+}
+
+.reveal img {
+    display: block;
+    margin-top: auto;
+    margin-right:auto;
+    margin-bottom: auto;
+    margin-left: auto;
+}
+
+section#title-slide {
+    background-image: url("img/bg_logo_qr.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 200% 100%;
+}
+
+ #thank-you {
+    background-image: url("img/bg_logo_qr3.png");
+    background-size: 10%;
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+}
