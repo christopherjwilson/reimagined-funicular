@@ -349,7 +349,7 @@ Inter block interval to allow return to baseline
 
 -  Activation in prefrontal areas especially targeted during the experience of gains and losses [@holper2014]
 
-- changes in oxygenated hemoglobin (HbO) concentrations during the 5-second period right after the decision was made [@li2012]
+- Changes in oxygenated hemoglobin (HbO) concentrations during the 5-second period right after the decision was made [@li2012]
 
 ## fNIRS: visualising activity - during construal cues {background-image="img/fnirs_results.png" background-size="100%" background-repeat="no-repeat"}
 
@@ -399,7 +399,7 @@ There might be an effect of Block as well as Condition
 
 - Keep improving manipulations and manipulation checks
 
-# Thank you. 
+# Thank you
 
 Christopher.Wilson@tees.ac.uk
 
