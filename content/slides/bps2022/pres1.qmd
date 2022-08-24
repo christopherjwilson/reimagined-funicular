@@ -2,6 +2,7 @@
 author: Christopher J. Wilson
 institute: Centre for Applied Psychological Science, Teesside University
 title: Examining the effects of construal on financial decision-making using fNIRS 
+subtitle: BPS Cognitive Section Conference
 date: 2022-09-08
 format:
   revealjs: 
@@ -404,10 +405,13 @@ Christopher.Wilson@tees.ac.uk
 
 \@CWilsonPsych
 
+[https://www.christopherjwilson.uk/slides/bps2022/](https://www.christopherjwilson.uk/slides/bps2022/)
+
 ```{r }
 
-knitr::include_graphics("img/qrCode1.png")
+knitr::include_graphics("img/qrCodeSlides.png")
 
 ```
+
 
 ## References
