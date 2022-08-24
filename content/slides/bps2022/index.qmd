@@ -399,7 +399,7 @@ There might be an effect of Block as well as Condition
 
 - Keep improving manipulations and manipulation checks
 
-# Thank you. 
+# Thank you
 
 Christopher.Wilson@tees.ac.uk
 
