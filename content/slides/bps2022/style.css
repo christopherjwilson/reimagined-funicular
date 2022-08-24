@@ -33,4 +33,20 @@ opacity: 0.7;
 
 
 
+@font-face {font-family: myFirstFont; src: url("//db.onlinewebfonts.com/t/99f7456dfd298c4545c7687ce8d5539d.eot"); src: url("//db.onlinewebfonts.com/t/99f7456dfd298c4545c7687ce8d5539d.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/99f7456dfd298c4545c7687ce8d5539d.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/99f7456dfd298c4545c7687ce8d5539d.woff") format("woff"), url("//db.onlinewebfonts.com/t/99f7456dfd298c4545c7687ce8d5539d.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/99f7456dfd298c4545c7687ce8d5539d.svg#Sansation Light") format("svg"); }
+
+@font-face {font-family: "Acumin Variable Concept"; src: url("//db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.eot"); src: url("//db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.woff") format("woff"), url("//db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.svg#Acumin Variable Concept") format("svg"); }
+
+
+.reveal,
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  font-family: "Acumin Variable Concept";
+}
+
+
 
