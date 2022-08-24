@@ -1,6 +1,6 @@
 ---
 author: Christopher J. Wilson
-institute: Teesside University
+institute: Centre for Applied Psychological Science, Teesside University
 title: Examining the effects of construal on financial decision-making using fNIRS 
 date: 2022-09-08
 format:
@@ -43,7 +43,9 @@ csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa
 
 -   Debate about whether this is self-control, or general cognitive fatigue. [@inzlicht2014; @hagger2010]
 
--   Cognitive exertion?
+- In the current research, inhibitory control tasks are also used (Stroop, Go-noGo)
+
+- For the purposes of this research, we will refer use the term Cognitive Exertion
 
 ::: notes
 Do the lab tasks (e.g. stroop response inhibition) exhaust a self-control resource or cause cognitive fatigue - I don't know - but for the purposes of this study it's fine either way
@@ -54,8 +56,9 @@ Do the lab tasks (e.g. stroop response inhibition) exhaust a self-control resour
 -    Construal level [@trope2003] can affect financial decisions [@schmeichel2011; @ulkumen2011]
 
 -   Construal theory: 
-  - high-level construal =  thinking about goals in a more abstract sense such as why we are trying to achieve a goal
-  - low-level construal = thinking in more detail about the necessary steps to achieve a goal
+
+    - High-level construal =  thinking about goals in a more abstract sense such as why we are trying to achieve a goal
+    - Low-level construal = thinking in more detail about the necessary steps to achieve a goal
 
 -   Construal is both a cause and consequence of cognitive exertion effect [@bruyneel2012; @wan2011; @raue2015; @khenfer2017]
 
@@ -97,8 +100,6 @@ Research Questions
 -   Study 2: Are there any neurological indicators that distinguish high- and low-construal decisions?
 
 ## Financial decision task: Studies 1 and 2
-
-Based on @brevers2018
 
 ```{r out.width="200%"}
 
@@ -295,7 +296,7 @@ We are looking at the prefrontal cortex which has been shown to correlate with a
 ::: 
 
 
-# Study 2: Results (to date)
+# Study 2: current status
 
 -   Current N = 13
 
@@ -339,8 +340,17 @@ Inter block interval to allow return to baseline
 
 # Preliminary findings
 
-## fNIRS analysis: visualising activity {background-image="img/fnirs_results.png" background-size="100%" background-repeat="no-repeat"}
+## fNIRS analysis and financial decisions
 
+- Previous studies have shown right DLPFC was found to be more deactivated under challenging risk decision making [@wanniarachchi2020]. 
+
+- DLPFC hemodynamic signals reflected a subjective value signal, correlating positively with individual risk attitude [@holper2014]
+
+-  Activation in prefrontal areas especially targeted during the experience of gains and losses [@holper2014]
+
+- changes in oxygenated hemoglobin (HbO) concentrations during the 5-second period right after the decision was made [@li2012]
+
+## fNIRS: visualising activity - during construal cues {background-image="img/fnirs_results.png" background-size="100%" background-repeat="no-repeat"}
 
 ## Behavioural data: mean % gambled (block * condition)
 
@@ -364,7 +374,11 @@ p1 <- allDataPres %>%
    geom_text(size = 4, position =position_dodge(1),vjust=-.5) 
 
 p1 
+
+
 ```
+
+There might be an effect of Block as well as Condition
 
 # Discussion / conclusions
 
@@ -384,6 +398,16 @@ p1
 
 - Keep improving manipulations and manipulation checks
 
-# Thank you. {.logo-slide}
+# Thank you. 
+
+Christopher.Wilson@tees.ac.uk
+
+\@CWilsonPsych
+
+```{r }
+
+knitr::include_graphics("img/qrCode1.png")
+
+```
 
 ## References
