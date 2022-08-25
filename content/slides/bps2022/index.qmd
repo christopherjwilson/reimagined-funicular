@@ -316,25 +316,47 @@ We are looking at the prefrontal cortex which has been shown to correlate with a
 
     -   Linear detrending
 
+## fNIRS analysis - preprocessing
 
-## fNIRS analysis - block level analysis
+```{r fig.width=10,fig.height=11}
+library(tidyverse)
+testData <- read.csv("testData.csv")
+p<- testData %>%
+ pivot_longer(cols = c(nir_value, nir_value_pre_lp, nir_value_pre_SMAR, nir_value_pre_dt), names_to = "measure", values_to = "nir_value") %>%
+filter(freq == 730) %>%
+  ggplot(aes(x = t, y = nir_value, colour = measure)) +
+ geom_line() +
+  facet_wrap(.~optode)
+
+ plotly::ggplotly(p, width = 1200, height = 500)
+```
+
+## fNIRS analysis - block level analysis {.smaller}
+
+
+
+
+
+
+
+```{r fig.width=16,fig.height=9}
+
+knitr::include_graphics("img/oxyPlot.png")
+
+```
 
 - Looking at mean levels of activation across trial types (i.e. different construal conditions) for each participant
 
-- Construal cue provides 30sec window - fNIRS activation usually 5-7secs
 
 
-```{r }
-
-knitr::include_graphics("img/construal_study2_seq.drawio.png")
-
-```
 
 ::: notes
 
 Mean activation per trial type (block analysis) is common, for example in cognitive exertion / mental load studies
 
 Inter block interval to allow return to baseline
+
+- Construal cue provides 30sec window - fNIRS activation usually 5-7secs
 
 :::
 
