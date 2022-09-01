@@ -1,16 +1,16 @@
 ---
-author: Christopher J. Wilson
+author: Dr. Christopher J. Wilson
 institute: Centre for Applied Psychological Science, Teesside University
 title: Examining the effects of construal on financial decision-making using fNIRS 
 subtitle: BPS Cognitive Section Conference, Sept 2022
 format:
   revealjs: 
     theme: simple
-    incremental: false
     logo: "logo.png"
     css: "style.css"
     width: 1200
     auto-animate: true
+    incremental: true
 bibliography: references.bib
 csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
 ---
@@ -39,13 +39,22 @@ csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa
 
 -   In the lab, a range of tasks have been used to elicit the effect, including those that target affect, attentional control, thought suppression or response inhibition. It has been replicated across labs [@hagger2016a; @hagger2010]
 
+::: notes
+
+One of the other ways this topichas been examined is through the lens of self-control ....
+
+There is plenty of evidence of an effect, -- not specifically what the effect is
+
+
+:::
+
 ## Self-control depletion and financial decisions
 
 -   Debate about whether this is self-control, or general cognitive fatigue. [@inzlicht2014; @hagger2010]
 
 - In the current research, inhibitory control tasks are also used (Stroop, Go-noGo)
 
-- For the purposes of this research, we will refer use the term Cognitive Exertion
+- For the purposes of this research, we will refer use the term **Cognitive Exertion**
 
 ::: notes
 Do the lab tasks (e.g. stroop response inhibition) exhaust a self-control resource or cause cognitive fatigue - I don't know - but for the purposes of this study it's fine either way
@@ -61,6 +70,13 @@ Do the lab tasks (e.g. stroop response inhibition) exhaust a self-control resour
     - Low-level construal = thinking in more detail about the necessary steps to achieve a goal
 
 -   Construal is both a cause and consequence of cognitive exertion effect [@bruyneel2012; @wan2011; @raue2015; @khenfer2017]
+
+::: notes
+
+If the effect of cognitive exertion, self-control exertion is inconsistent, what factors could the effect depend on?
+
+... But why focus on construal?...
+:::
 
 ## Much of the support offered to those in financial difficulty is knowledge focused
 
@@ -110,7 +126,7 @@ knitr::include_graphics("img/Fin_Dec_Task.png")
 
 ```{r out.width="200%"}
 
-knitr::include_graphics("img/screenshot_financialCue.png")
+knitr::include_graphics("img/construal_cue_high.png")
 ```
 
 ## Financial decision task: Coin Toss Decision
