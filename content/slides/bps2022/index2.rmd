@@ -11,6 +11,7 @@ format:
     width: 1200
     auto-animate: true
     slide-number: true
+    reveal_plugins: ["notes", "chalkboard", "menu"]
 bibliography: references.bib
 csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
 
