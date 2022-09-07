@@ -1,0 +1,457 @@
+---
+author: Dr. Christopher J. Wilson
+institute: Centre for Applied Psychological Science, Teesside University
+title: Examining the effects of construal on financial decision-making using fNIRS 
+subtitle: BPS Cognitive Section Conference, Sept 2022
+format:
+  revealjs: 
+    theme: simple
+    logo: "logo.png"
+    css: "style.css"
+    width: 1200
+    auto-animate: true
+    slide-number: true
+bibliography: references.bib
+csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
+
+---
+
+## Cognitive effects of financial distress
+
+-   Financial distress can increase cognitive load [@vohs2013; @mani2020a] 
+
+-   This can affect cognitive processes such as planning, reasoning and decision-making [@mani2013; @hofmann2012; @hinson2003; @roby2022; @debruijn2022].
+
+- What's happening?
+
+    - Need to attend to finances constantly 
+    - Associated stress/anxiety is draining
+    - Need to constantly exercise self control
+
+::: notes
+-   Need to attend to finances constantly / stress is draining
+-   Payday effect - closer to payday = less money more resource needed to manage
+-   Need to constantly exercise self control
+:::
+
+## Self-control depletion and financial decisions
+
+-   Self-control is a limited cognitive resource and exhausting that resource affects subsequent behaviour ["ego depletion" : @baumeister2014; @baumeister2018; @baumeister2008; @baumeister2006; @baumeister1998]
+
+-   Self-control depletion might affect financial or risk-based decisions [@fischer2012a; @gerhardt2017; @koppel2019 ]
+
+-   In the lab, a range of tasks have been used to elicit the effect, including those that target affect, attentional control, thought suppression or response inhibition. It has been replicated across labs [@hagger2016a; @hagger2010]
+
+::: notes
+
+One of the other ways this topichas been examined is through the lens of self-control ....
+
+There is plenty of evidence of an effect, -- not specifically what the effect is
+
+
+:::
+
+## Self-control depletion and financial decisions
+
+-   Debate about whether this is self-control, or general cognitive fatigue. [@inzlicht2014; @hagger2010]
+
+- In the current research, inhibitory control tasks are also used (Stroop, Go-noGo)
+
+- For the purposes of this research, we will refer use the term **Cognitive Exertion**
+
+::: notes
+Do the lab tasks (e.g. stroop response inhibition) exhaust a self-control resource or cause cognitive fatigue - I don't know - but for the purposes of this study it's fine either way
+:::
+
+## Construal could moderate the relationship between CL and financial decisions
+
+-    Construal level [@trope2003] can affect financial decisions [@schmeichel2011; @ulkumen2011]
+
+-   Construal theory: 
+
+    - High-level construal =  thinking about goals in a more abstract sense such as why we are trying to achieve a goal
+    - Low-level construal = thinking in more detail about the necessary steps to achieve a goal
+
+-   Construal is both a cause and consequence of cognitive exertion effect [@bruyneel2012; @wan2011; @raue2015; @khenfer2017]
+
+::: notes
+
+If the effect of cognitive exertion, self-control exertion is inconsistent, what factors could the effect depend on?
+
+... But why focus on construal?...
+:::
+
+## Much of the support offered to those in financial difficulty is knowledge focused
+
+-   Financial literacy has been shown to increase knowledge and change intentions - but only sometimes examines behaviours [@amagir2018; @mandell2009; @kaiser2020]
+
+-   The evidence on efficacy is mixed [@Luhrmann2015] and appears to be dependent on many contextual factors [@Meier2013; @Foster2015; @Chardon2016; @Alessie2013; @Henager2016; @Chen2018b; @Allgood2016b]
+
+-   Could construal play a role - how information is construed affect subsequent behaviour?
+
+::: notes
+Contextual factors: including psychological traits/states (e.g. self-control, presentation format, age)
+
+Could construal play a role? - how instructions are perceived
+:::
+
+## The current research
+
+-   There is research suggesting construal might mediate cognitive exertion effects [@krastev2020a].
+
+-   However:
+    -   Direct manipulation of construal is not common
+    -   Lab manipulations of construal are often generic, as opposed to context specific
+    -   There is a dearth of work examining the effects at neurological level
+
+::: notes
+Contextual factors: including psychological traits/states (e.g. self-control, presentation format, age)
+:::
+
+## General Overview
+
+-   In 2 lab-based studies, participants are exposed to cognitive exertion task(s), followed by a financial decision task where each trial is preceded by a construal cue (low/high or control condition)
+
+Research Questions
+
+-   Study 1: Following cognitive exertion, how does construal affect financial decision-making?
+
+-   Study 2: Are there any neurological indicators that distinguish high- and low-construal decisions?
+
+## Financial decision task: Studies 1 and 2
+
+```{r out.width="200%"}
+
+knitr::include_graphics("img/Fin_Dec_Task.png")
+```
+
+## Financial decision task: Construal cues
+
+```{r out.width="200%"}
+
+knitr::include_graphics("img/construal_cue_high.png")
+```
+
+## Financial decision task: Coin Toss Decision
+
+```{r out.width="100%"}
+
+knitr::include_graphics("img/screenshot_coinToss.png")
+
+```
+
+## Financial decision task: Coin Toss Trials
+
+-   n trials = 20
+
+-   Expected value of trials calculated as:
+
+    *value of gain \* probability of gain - value of loss \* probability of loss*
+
+-   Expected value of trials: 0, 2.5, 5, 7.5, 10
+
+    ```{r out.width="50%"}
+
+    knitr::include_graphics("img/screenshot_coinToss.png")
+    ```
+
+    ::: notes
+    Logically, we would expect EV to predict likelihood of gambling
+    :::
+
+## Study 1: Design {.r-fit-text}
+
+-   1-way independent, experimental design with 3 conditions.
+
+-   IV: construal level (High-Construal, Low-Construal and Control condition).
+
+-   Construal cues were presented as part of the financial decision (coin-toss gamble) task [adapted from @brevers2018].
+
+-   DV: Did participants gamble on coin-toss trials? (yes/no)
+
+::: notes
+Experimental conditions were finance-specific (REF, XXXX) and the construal level of the cues was manipulated between conditions (based on REF, XXXX). A third control condition contained neutral cues which were not related to self-control (adapted from Brevers et al. (2018)).
+
+The dependent variable was measured as gambles accepted in the financial decision (coin-toss) task.
+:::
+
+## Study 1: Participants
+
+-   76 participants took part, 75 completed the study
+
+-   11 males, 64 females
+
+-   Random allocation to conditions resulted in the following independent groups:
+
+    | Condition         | n   |
+    |-------------------|-----|
+    | Control Condition | 26  |
+    | High Construal    | 25  |
+    | Low Construal     | 24  |
+
+    ::: notes
+    Of the 76 participants originally recruited for the study, 1 participant did not pass the Stage 1 task within three attempts and so did not progress to the end of the study. Analysis was conducted on the 75 participants who completed the study. Mean accuracy in the Stage 1 task was 95% (sd = 1). All participants answered all of the attention check questions correctly.
+    :::
+
+## Study 1: Procedure {.smaller}
+
+```{r out.height="270px", out.width="1300px"}
+
+knitr::include_graphics("img/construal_study1_seq.drawio.png")
+
+```
+
+-   Participants are informed that they will be entered into a lottery at the end of the study
+
+-   If they are randomly selected, one of their coin-tosses will be chosen and they can win the outcome of that specific toss for real
+
+-   "Your choices in this task do matter"
+
+::: notes
+The stroop task required a 70% accuracy rate to progress and could be repeated up to 3 times before the study would end automatically
+:::
+
+# Study 1: Results
+
+## Mean trials gambled in each condition
+
+```{r }
+
+knitr::include_graphics("img/study1_meanGambled.png")
+
+```
+
+## Model 1: Does expected value predict likelihood of gambling?
+
+-   The model was a significantly better fit than the null model ($χ^2(4) = 441.47, p < 0.01)$ , Pseudo $R^2$ (fixed effects) = 0.30
+
+-   A significant likelihood of not gambling when expected value of the coin-toss was 0 and significant likelihood of gambling in trials with higher expected values than 0 (with the exception of the Expected Value at 2.5)
+
+    ::: notes
+    A mixed effects logistic regression model was fitted, with expected value as fixed effect and participants as random effect variables, respectively (R: glmer, biniomial).
+    :::
+
+## Model 2: Does construal condition predict likelihood of gambling?
+
+-   Model 2 was a significantly better fit than Model 1 $(χ^2(2) = 10.60, p < 0.01)$ , $\delta$AIC = -6.6, Pseudo $R^2$ (fixed effects) = 0.32
+
+-   Examination of the coefficients showed that both Low Construal and High Construal were significant High Construal Condition (β = -0.97, p \< 0.01) compared to the Low Construal Condition (β = -0.49, p \< 0.05).
+
+    ::: notes
+    -   A mixed effects logistic regression model was fitted, with expected value and construal condition as fixed effects and participants as random effect variables, respectively (R: glmer, biniomial).
+
+    -   No interaction was between Expected Value and Construal Condition was present.
+    :::
+
+## Model 2: Comparison of lsmeans between condition
+
+```{r out.width="200%", fig.cap = "Pairwise comparison of the groups showed that High Construal was significantly different to the Control Condition"}
+
+knitr::include_graphics("img/exp1_lsmeans.png")
+```
+
+## Model 3: Does self control predict likelihood of gambling?
+
+-   Adding self control (BSCI score) did not have a significant effect on the model ($\delta$AIC = 1.23, p \> 0.05)
+
+## Study 1 Discussion / Study 2 additions
+
+-   There is an effect of construal - High Construal associated with lowest probability of "gambling" and Control condition the highest
+
+-   Changes to Study 2:
+
+    -   Increase cognitive exertion effect with additional inhibition task
+    -   Make construal more explicit by having participants write construal-level statements before each condition/block
+
+    ::: notes
+     - e.g., "Write down 5 reasons WHY you would save money"; "Write down 5 reasons HOW you would save money", "Write down 5 things you van see in the room"
+    :::
+
+## Study 2: Research Question
+
+-   Do the behavioural results replicate Study 1?
+
+-   Are there different patterns of neurological activation associated with high- and low-construal conditions?
+
+-   E.g., during the construal cue period immediately preceding the coin-toss decision
+
+## Study 2: Design and Procedure
+
+```{r out.height="270px", out.width="1300px"}
+
+knitr::include_graphics("img/construal_study2_seq.drawio.png")
+
+```
+
+-   Within-groups design necessitated by fNIRS
+-   Planned N = 33
+
+## Study 2: fNIRS
+
+:::: {.columns}
+
+::: {.column width="60%"}
+```{r out.height="100%"}
+
+knitr::include_graphics("img/fnirs_overview.png")
+
+```
+:::
+
+::: {.column width="40%"}
+- Markers sent via serial/usb to fNIRS for specified events
+
+- Levels of hbO and hbR are calculated during certain time periods relative to baseline
+
+
+:::
+
+::::
+
+::: notes
+
+We are looking at the prefrontal cortex which has been shown to correlate with attention, perception, cognitive/mental load, financial economic decisions
+
+::: 
+
+
+# Study 2: current status
+
+-   Current N = 13
+
+-   No inferential analysis run yet
+
+-   We can observe fNIRS patterns of activation
+
+## fNIRS analysis - preprocessing
+
+-   Data analysed using a custom R script (will be available on Github)
+
+-   Preprocessing to remove noise, movement artifacts etc:
+
+    -   .1 Hz Lowpass filter (heartrate, respiration)
+
+    -   Moving average filter (1.5s)
+
+    -   Linear detrending
+
+## fNIRS analysis - preprocessing
+
+```{r fig.width=10,fig.height=11}
+library(tidyverse)
+testData <- read.csv("testData.csv")
+p<- testData %>%
+ pivot_longer(cols = c(nir_value, nir_value_pre_lp, nir_value_pre_SMAR, nir_value_pre_dt), names_to = "measure", values_to = "nir_value") %>%
+filter(freq == 730) %>%
+  ggplot(aes(x = t, y = nir_value, colour = measure)) +
+ geom_line() +
+  facet_wrap(.~optode)
+
+ plotly::ggplotly(p, width = 1200, height = 500)
+```
+
+## fNIRS analysis - block level analysis {.smaller}
+
+
+
+
+
+
+
+```{r fig.width=16,fig.height=9}
+
+knitr::include_graphics("img/oxyPlot.png")
+
+```
+
+- Looking at mean levels of activation across trial types (i.e. different construal conditions) for each participant
+
+
+
+
+::: notes
+
+Mean activation per trial type (block analysis) is common, for example in cognitive exertion / mental load studies
+
+Inter block interval to allow return to baseline
+
+- Construal cue provides 30sec window - fNIRS activation usually 5-7secs
+
+:::
+
+# Preliminary findings
+
+## fNIRS analysis and financial decisions
+
+- Previous studies have shown right DLPFC was found to be more deactivated under challenging risk decision making [@wanniarachchi2020]. 
+
+- DLPFC hemodynamic signals reflected a subjective value signal, correlating positively with individual risk attitude [@holper2014]
+
+-  Activation in prefrontal areas especially targeted during the experience of gains and losses [@holper2014]
+
+- Changes in oxygenated hemoglobin (HbO) concentrations during the 5-second period right after the decision was made [@li2012]
+
+## fNIRS: visualising activity - during construal cues {background-image="img/fnirs_results.png" background-size="100%" background-repeat="no-repeat"}
+
+## Behavioural data: mean % gambled (block * condition)
+
+```{r}
+library(tidyverse)
+
+allDataPres <- read_csv("C:/Users/wilso/Documents/GitHub/fnirs_analysis/allData.csv")
+
+
+allDataPres$condition <- as.factor(allDataPres$condition)
+levels(allDataPres$condition) <- list(Control  = "cue1", High = "cue2", Low = "cue3")
+
+allDataPres$block <- as.factor(allDataPres$block)
+
+p1 <- allDataPres %>% 
+  group_by(condition, block) %>% 
+  summarise(gambled = sum(gambled)/length(gambled)*100) %>%
+  ungroup() %>%
+  ggplot(aes(x = condition, y = gambled, fill = block, label = round(gambled, digits = 2))) +
+  geom_col( position=position_dodge()) +
+   geom_text(size = 4, position =position_dodge(1),vjust=-.5) 
+
+p1 
+
+
+```
+
+There might be an effect of Block as well as Condition
+
+# Discussion / conclusions
+
+## Current status
+
+- Study 1 shows an effect of construal on gambling decisions
+
+- Study 2 preliminary data indicates possible differences in neurological activity between conditions - not yet tested
+
+- A lot more data yet to include when Study 2 models are tested (financial literacy, numeracy etc.)
+
+## Further work?
+
+- Will continue to explore Cognitive Load / Exertion effects on financial decisions
+
+- Looking at more complex / ecologically-valid decisions 
+
+- Keep improving manipulations and manipulation checks
+
+# Thank you
+
+Christopher.Wilson@tees.ac.uk
+
+\@CWilsonPsych
+
+[https://www.christopherjwilson.uk/slides/bps2022/](https://www.christopherjwilson.uk/slides/bps2022/)
+
+```{r }
+
+knitr::include_graphics("img/qrCodeSlides.png")
+
+```
+
+
+## References

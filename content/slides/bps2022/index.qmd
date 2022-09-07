@@ -10,6 +10,7 @@ format:
     css: "style.css"
     width: 1200
     auto-animate: true
+    slide-number: true
 bibliography: references.bib
 csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
 
@@ -20,9 +21,11 @@ csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa
 -   Financial distress can increase cognitive load [@vohs2013; @mani2020a] 
 
 -   This can affect cognitive processes such as planning, reasoning and decision-making [@mani2013; @hofmann2012; @hinson2003; @roby2022; @debruijn2022].
-    
-    - Need to attend to finances constantly / stress is draining
-    - Payday effect - closer to payday = less money more resource needed to manage
+
+- What's happening?
+
+    - Need to attend to finances constantly 
+    - Associated stress/anxiety is draining
     - Need to constantly exercise self control
 
 ::: notes
