@@ -11,7 +11,6 @@ format:
     width: 1200
     auto-animate: true
     slide-number: true
-    reveal_plugins: ["notes", "chalkboard", "menu"]
 bibliography: references.bib
 csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
 
@@ -19,7 +18,7 @@ csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa
 
 ## Cognitive effects of financial distress
 
--   Financial distress can increase cognitive load [@vohs2013; @mani2020a] 
+-   Financial distress has detrimental effects on cognition [@vohs2013; @mani2020a] 
 
 -   This can affect cognitive processes such as planning, reasoning and decision-making [@mani2013; @hofmann2012; @hinson2003; @roby2022; @debruijn2022].
 
@@ -64,20 +63,22 @@ There is plenty of evidence of an effect, -- not specifically what the effect is
 Do the lab tasks (e.g. stroop response inhibition) exhaust a self-control resource or cause cognitive fatigue - I don't know - but for the purposes of this study it's fine either way
 :::
 
-## Construal could moderate the relationship between CL and financial decisions
+## What is Construal? {.smaller}
 
--    Construal level [@trope2003] can affect financial decisions [@schmeichel2011; @ulkumen2011]
-
--   Construal theory: 
+-   Construal theory [@trope2003]: 
 
     - High-level construal =  thinking about goals in a more abstract sense such as why we are trying to achieve a goal
     - Low-level construal = thinking in more detail about the necessary steps to achieve a goal
 
 -   Construal is both a cause and consequence of cognitive exertion effect [@bruyneel2012; @wan2011; @raue2015; @khenfer2017]
 
+-    Construal might affect financial or risk-based decisions [@schmeichel2011; @ulkumen2011]
+
 ::: notes
 
 If the effect of cognitive exertion, self-control exertion is inconsistent, what factors could the effect depend on?
+
+
 
 ... But why focus on construal?...
 :::
@@ -98,13 +99,13 @@ Could construal play a role? - how instructions are perceived
 
 ## The current research
 
--   There is research suggesting construal might mediate cognitive exertion effects [@krastev2020a].
+-   There is research suggesting construal might moderate cognitive exertion effects [@krastev2020a].
 
 -   However:
     -   Direct manipulation of construal is not common
     -   Lab manipulations of construal are often generic, as opposed to context specific
-    -   There is a dearth of work examining the effects at neurological level
-
+    -   There is a dearth of work examining neurological corrlates
+    
 ::: notes
 Contextual factors: including psychological traits/states (e.g. self-control, presentation format, age)
 :::
@@ -115,9 +116,9 @@ Contextual factors: including psychological traits/states (e.g. self-control, pr
 
 Research Questions
 
--   Study 1: Following cognitive exertion, how does construal affect financial decision-making?
+-   Study 1: Does construal affect financial decision-making?
 
--   Study 2: Are there any neurological indicators that distinguish high- and low-construal decisions?
+-   Study 2: Are there any neurological indicators that distinguish high- and low-construal?
 
 ## Financial decision task: Studies 1 and 2
 
