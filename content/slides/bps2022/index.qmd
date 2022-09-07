@@ -10,10 +10,9 @@ format:
     css: "style.css"
     width: 1200
     auto-animate: true
-    incremental: true
 bibliography: references.bib
 csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
-always_allow_html: true
+
 ---
 
 ## Cognitive effects of financial distress
