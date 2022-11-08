@@ -13,12 +13,12 @@ content:
       ? id
     netlify:
       captcha: true
-  appointment_url: https://calendly.com/christopherjwilson
+  appointment_url: https://christopherjwilsondiss.youcanbook.me/
   contact_links:
     - icon: mastodon
       icon_pack: fab
       name: Toot Me
-      link: https://mas.to/@Cwilsonpsych
+      link: https://mas.to/@Cwilsonpsychgit
     - icon: twitter
       icon_pack: fab
       name: Tweet Me
@@ -26,4 +26,4 @@ content:
 design:
   columns: "2"
 ---
-
+<a rel="me" href="https://mas.to/@Cwilsonpsych">Mastodon</a>
