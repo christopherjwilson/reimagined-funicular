@@ -18,7 +18,7 @@ content:
     - icon: mastodon
       icon_pack: fab
       name: Toot Me
-      link: https://mas.to/@Cwilsonpsychgit
+      link: https://mas.to/@Cwilsonpsych
     - icon: twitter
       icon_pack: fab
       name: Tweet Me
