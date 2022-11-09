@@ -1,6 +1,6 @@
 +++
 title = "Examining the effects of construal on financial decision-making using fNIRS."
-date = "2020-09-06"
+date = "2022-09-06"
 authors = ["Christopher J Wilson"]
 publication_types = ["1"]
 publication = "BPS Cognitive Section Conference"
